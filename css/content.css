@@ -1,0 +1,325 @@
+body
+{
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Adjust card layout within the grid */
+.swiper-container {
+    display: grid;
+    grid-gap: 30px; /* Adjust grid gap for more compact layout */
+    grid-template-columns: repeat(3, 1fr); /* Display 3 cards per row */
+    width: 90%;
+    margin: auto;
+    padding-bottom: 40px;
+}
+
+.card {
+    /* Adjust card content styling */
+    width: 100%; 
+    height: 100%; 
+
+}
+
+/* Adjust image size */
+.resize {
+    max-height: 400px; /* Set a maximum height for the images */
+    width: auto; /* Allow the width to adjust based on aspect ratio */
+}
+
+/* Custom CSS to adjust navigation button position */
+.swiper-container {
+    position: relative; 
+}
+
+/* Position the navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+    position: absolute;
+    top: 50%; /* Adjust this value to control the vertical position */
+    transform: translateY(-50%);
+    z-index: 1; /* Ensure the buttons are above the slides */
+}
+
+
+#Categories
+{
+    display: grid;
+    grid-gap: 70px 20px;
+    grid-template-columns: repeat(5, 1fr);
+    width: 90%;
+    margin: auto;
+    padding-bottom: 40px;
+}
+.category-card {
+    display: inline-block;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+h2
+{
+    color: rgb(3, 94, 94);
+}
+
+/*Movies  */
+
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  background: var(--color-primary);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.main-header {
+  padding: 20px 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.main-header .logo {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.main-header ul {
+  display: flex;
+}
+
+.main-header ul li {
+  margin-left: 20px;
+}
+
+.main-header ul li a {
+  font-size: 16px;
+}
+
+.main-header ul li a:hover {
+  color: var(--color-secondary);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+/* Card */
+.card {
+  /* background: #04376b; */
+  /* background: rgb(0, 0, 0); */
+  padding: 5px;
+}
+
+.card img {
+  width: 100%;
+}
+
+.card-body {
+  padding: 10px;
+  font-size: 20px;
+  background: #f0ecec;
+}
+
+.card-title {
+  color: rgb(37, 32, 32);
+}
+
+.card:hover {
+  /* transform: scale(1.05);
+  transition: all 0.5s ease-in-out; */
+  /* background: #0a4b8f; */
+  /* background: #ff0000; */
+  transition: 0.7s;
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+small {
+  color: #000000a4;
+}
+.container{
+  margin-top:5%;
+}
+/* Style to create scroll bar in dropdown */ 
+.scrollable-dropdown{
+    height: auto;
+    max-height:320px;  /* Increase / Decrease value as per your need */
+    overflow-x: hidden;
+}
+
+/* Slider */
+.swiper {
+  width: 100%;
+  height: 50%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-rating {
+  padding: 10px;
+  user-select: none;
+}
+
+/* Movie Details */
+.details-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 0 30px;
+}
+
+.details-top img {
+  width: 400px;
+  height: 100%;
+  margin-right: 60px;
+  object-fit: cover;
+}
+
+.details-top p {
+  margin: 20px 0;
+}
+
+.details-top .btn {
+  margin-top: 20px;
+}
+
+.details-bottom {
+}
+
+.details-bottom li {
+  margin: 15px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #fff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+
+
+.pagination {
+  margin-top: 20px;
+}
+
+.page-counter {
+  margin-top: 10px;
+}
+
+/* Alert */
+.alert {
+  background: red;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.alert-success {
+  background: green;
+}
+
+.alert-error {
+  background: red;
+}
+.logo span{
+  color: #ff0000;
+}
+
+.main-footer {
+  background: black;
+}
+
+#footer:hover {
+  color: #ff0000;
+}
+
+#prev{
+  background-color:  white;
+  color: black;
+  border: none;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  position: absolute;
+  cursor: pointer !important;
+}
+
+#prev:hover {
+  background: #ff0000;
+  color: white;
+  transition: 0.7s;
+  transform: scale(0.9);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+#next{
+  background-color:  white;
+  color: black;
+  border: none;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  position: absolute;
+  left: 19%;
+}
+
+#next:hover {
+  background: #ff0000;
+  color: white;
+  transition: 0.7s;
+  transform: scale(0.9);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+#page-counter {
+  left: 17%;
+}
+
+#release {
+  color: #c4c4c4;
+}
