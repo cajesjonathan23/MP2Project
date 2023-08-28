@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <title> LobbyTech </title>
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+   
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <!-- header links -->
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <!-- slider links -->
+   
+    <!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+    <script src="js/jQuery3.4.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        .book-details-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 70%; /* Set maximum width for responsiveness */
+            margin: 0 auto; /* Center horizontally */
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .book-image {
+            max-width: 50%; /* Take up half of the container's width */
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .book-details-content {
+            max-width: 50%; /* Take up the other half of the container's width */
+        }
+
+        @media (max-width: 768px) {
+            /* Adjust styles for smaller screens */
+            .book-details-container {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+
+            .book-image {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .book-details-content {
+                max-width: 100%;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div id="1"></div>
+    <script>
+        load("header.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(1).innerHTML = req.responseText;
+        }
+    </script>
+  
+<br><br><br><br>
+<div id="bookDetailsContainer" class="container">
+    <!-- Book details will be populated dynamically -->
+    <div class="book-details-container">
+        <img src="" alt="Book Title" class="book-image" id="bk-img">
+        <div class="book-details-content">
+            <h2 id="bookTitle"></h2>
+            <p><strong>Author:</strong> <span id="bookAuthor"></span></p>
+            <p><strong>Publisher:</strong> <span id="bookPublisher"></span></p>
+            <p><strong>Pages:</strong> <span id="bookPages"></span></p>
+            <p><strong>Year:</strong> <span id="bookYear"></span></p>
+            <p><strong>Description:</strong> <span id="bookDescription"></span></p>
+            <button class=" btn btn-success"><a id="bookLink" href="" target="_blank">Download</a></button>
+        </div>
+    </div>
+</div>
+<br><br>
+    <!-- FOOTER -->
+    <div id="4"></div>
+    <script>
+        load("footer.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(4).innerHTML = req.responseText;
+        }
+    </script>
+
+
+</body>
+
+<script>
+       async function fetchAndDisplayBookDetails() {
+            try {
+                const selectedBookId = sessionStorage.getItem("selectedBookId");
+
+                if (selectedBookId) {
+                    const response = await fetch(`https://www.dbooks.org/api/book/${selectedBookId}`);
+                    const data = await response.json();
+
+                    // Populate the book details content
+                    document.getElementById("bk-img").src = data.image;
+                    document.getElementById("bookTitle").textContent = data.title;
+                    document.getElementById("bookAuthor").textContent = data.authors;
+                    document.getElementById("bookPublisher").textContent = data.publisher;
+                    document.getElementById("bookPages").textContent = data.pages;
+                    document.getElementById("bookYear").textContent = data.year;
+                    document.getElementById("bookDescription").textContent = data.description;
+                    document.getElementById("bookLink").href = data.url;
+                } else {
+                    console.error("No selected book ID found.");
+                }
+            } catch (error) {
+                console.error("Error fetching book details:", error);
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", fetchAndDisplayBookDetails);
+   
+  </script>
+<script src="content.js"></script>
+
+</html>
