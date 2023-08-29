@@ -24,6 +24,340 @@
 
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>          
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial";
+}
+.menu{
+    border-radius: 5px;
+}
+body{
+  overflow-x: hidden;
+}
+
+#whole-flex {
+  position: absolute;
+  flex-direction: column;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -10;
+}
+
+/* NavBar */
+.sidenav {
+  max-width: 380px;
+  width: 85%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: left center;
+  transform: translateX(-380px);
+}
+
+.sidenavHeader {
+  color: white;
+  font-weight: bold;
+  background-color: rgb(35, 47, 62);
+  padding: 10px 0px 10px 30px;
+  font-size: 23px;
+}
+
+.sidenavContentHeader {
+  margin-top: 5px;
+  padding: 15px 0px 15px 25px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black !important; 
+}
+
+.sidenavContent {
+  padding: 15px 0px 15px 25px;
+}
+
+.sidenavContent:hover {
+  background-color: #eaeded;
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  color: gray;
+  background-color: gray;
+  margin: 15px auto 10px auto;
+}
+
+.sidenavRow {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 15px 25px 15px 25px;
+}
+
+.sidenavRow:hover {
+  background-color: #eaeded;
+}
+
+.sidenavRow:hover i {
+  color: #111111 !important;
+}
+
+#closeBtn {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 390px;
+  color: white;
+  font-size: 50px;
+  cursor: pointer;
+  z-index: 75;
+  transform: translateY(-5px);
+  transition: visibility 0.5s;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: black;
+}
+
+/* animation */
+@keyframes collapse {
+  0% {
+    z-index: 100;
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-380px);
+  }
+}
+
+@keyframes expand {
+  0% {
+    z-index: 100;
+    transform: translateX(-380px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Overlay */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Dropdown */
+.sidenavContainer hr {
+  width: 85%;
+}
+
+.sidenavRowDropdown {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+  padding: 15px 25px 15px 25px;
+  cursor: pointer;
+}
+
+.sidenavRowDropdown:hover {
+  background-color: #eaeded;
+}
+
+.sidenavRowDropdown:hover i {
+  color: #111111 !important;
+}
+
+.sidenavContainer {
+  display: none;
+  height: 0px;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: center top;
+}
+
+@keyframes expandDropDown {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes collapseDropDown {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+}
+
+/* Container part */
+#main-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+@keyframes mainAway {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-380px);
+  }
+}
+
+@keyframes mainBack {
+  0% {
+    transform: translateX(-380px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+#sub-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  background-color: white;
+  transform: translateX(380px);
+}
+
+@keyframes subBack {
+  0% {
+    transform: translateX(380px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes subPush {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(380px);
+  }
+}
+
+#mainMenu {
+  margin-top: 5px;
+  padding: 15px 0px 15px 25px;
+  font-weight: bold;
+  color: black !important;
+}
+
+#mainMenu:hover {
+  background-color: #eaeded;
+  cursor: pointer;
+}
+/* Add custom styles for the movie details section */
+.container {
+  margin-top: 20px;
+}
+/* styles.css */
+
+.back {
+  margin-bottom: 20px;
+}
+
+#btn {
+  color: #ffffff; /* Text color */
+  background-color: #007bff; /* Blue background color */
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 15px; /* Add some padding for better visibility */
+  border-radius: 5px; /* Add rounded corners */
+  transition: background-color 0.3s ease-in-out; /* Add smooth transition */
+}
+
+#btn i {
+  margin-right: 5px;
+}
+
+/* Add hover effect */
+#btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  text-decoration: none;
+}
+
+.movie-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.movie-details {
+  margin-top: 60px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjust spacing and layout for different screen sizes */
+@media (max-width: 767px) {
+  .movie-details {
+    margin-top: 20px;
+  }
+}
+
+
+    </style>
 </head>
 
 <body>
@@ -39,27 +373,457 @@
             document.getElementById(1).innerHTML = req.responseText;
         }
     </script>
-  
+         <br><br><br>
+         <div id="overlay" onclick="closeNav()"></div>
+     
+         <div id="closeBtn" onclick="closeNav()">&times;</div>
+         <div class="sidenav" id="mySidenav">
+           <div class="sidenavHeader">
+             <i class="fas fa-user-circle"></i> Hello, Sign In
+           </div>
+           <!--Below SideNavHeader-->
+           <div id="main-container">
+             <div class="sidenavContentHeader">Trending</div>
+             <a href="#"><div class="sidenavContent">Best Sellers</div></a>
+             <a href="#"><div class="sidenavContent">New Releases</div></a>
+             <a href="#"><div class="sidenavContent">Movers and Shakers</div></a>
+             <hr />
+             <div class="sidenavContentHeader">Digital Content And Devices</div>
+             <a href="#" onclick="openPrimeVideo()"
+               ><div class="sidenavRow">
+                 <div>Prime Video</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#" onclick="openAmazonMusic()"
+               ><div class="sidenavRow">
+                 <div>Amazon Music</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#"
+               ><div class="sidenavRow">
+                 <div>Apps for Android</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#"
+               ><div class="sidenavRow">
+                 <div>Echo, Alexa & Smart Home</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#"
+               ><div class="sidenavRow">
+                 <div>Fire TV</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#"
+               ><div class="sidenavRow">
+                 <div>Fire Tablets</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#"
+               ><div class="sidenavRow">
+                 <div>Kindle E-readers & Books</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#"
+               ><div class="sidenavRow">
+                 <div>Audible Audiobooks</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <hr />
+             <div class="sidenavContentHeader">Shop By Department</div>
+             <a href="#"
+               ><div class="sidenavRow">
+                 <div>Amazon Fresh</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i></div
+             ></a>
+             <a href="#">
+               <div class="sidenavRow">
+                 <div>Books</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+               </div>
+             </a>
+             <a href="#">
+               <div class="sidenavRow">
+                 <div>Films, TV, Music & Games</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+               </div>
+             </a>
+             <a href="#">
+               <div class="sidenavRow">
+                 <div>Electronics & Computers</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+               </div>
+             </a>
+             <div class="sidenavContainer" id="firstContainer">
+               <hr />
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Home, Garden, Pets & DIY</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Toys, Children & Baby</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Clothes, Shoes, Jewellery & Accessories</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Sports & Outdoors</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Food & Grocery</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Health & Beauty</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Car & Motorbike</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Business, Industry & Science</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+             </div>
+             <div
+               class="sidenavRowDropdown"
+               id="firstDropDown"
+               onclick="firstDropDown()"
+             >
+               <div style="color: black;">See All</div>
+               <i
+                 class="fas fa-chevron-down"
+                 style="color: #8e9090; margin-left: 10px"
+               >
+               </i>
+             </div>
+             <hr />
+             <div class="sidenavContentHeader">Programs & Features</div>
+             <a href="#">
+               <div class="sidenavRow">
+                 <div>Gift Cards & Top Up</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+               </div>
+             </a>
+             <a href="#">
+               <div class="sidenavRow">
+                 <div>Find a Gift</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+               </div>
+             </a>
+             <a href="#">
+               <div class="sidenavRow">
+                 <div>Handmade</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+               </div>
+             </a>
+             <a href="#">
+               <div class="sidenavRow">
+                 <div>Amazon Launchpad</div>
+                 <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+               </div>
+             </a>
+             <!--Beginning of second sidenavContainer-->
+             <div class="sidenavContainer" id="secondContainer">
+               <hr />
+               <a href="#">
+                 <div class="sidenavContent">Made In Italy</div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Home Services</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavContent">Prime Wardrobe</div>
+               </a>
+               <a href="#">
+                 <div class="sidenavRow">
+                   <div>Amazon Business</div>
+                   <i class="fas fa-chevron-right" style="color: #8e9090"></i>
+                 </div>
+               </a>
+               <a href="#">
+                 <div class="sidenavContent">Amazon Second Chance</div>
+               </a>
+             </div>
+             <div
+               class="sidenavRowDropdown"
+               id="secondDropDown"
+               onclick="secondDropDown()"
+             >
+               <div>See All</div>
+               <i
+                 class="fas fa-chevron-down"
+                 style="color: #8e9090; margin-left: 10px"
+               >
+               </i>
+             </div>
+             <hr />
+             <div class="sidenavContentHeader">Help & Settings</div>
+             <a href="#"><div class="sidenavContent">Your Account</div></a>
+             <a href="#"><div class="sidenavContent">Currency Settings</div></a>
+             <a href="#"><div class="sidenavContent">Customer Service</div></a>
+             <a href="#"><div class="sidenavContent">Sign In</div></a>
+             <div style="height: 50px"></div>
+           </div>
+           <!--End of first container-->
+     
+           <div id="sub-container">
+             <div id="mainMenu">
+               <i class="fas fa-chevron-left" style="color: #8e9090"></i> MAIN MENU
+             </div>
+             <hr />
+             <div id="sub-container-content">
+               <!-- <div class="sidenavContentHeader">Prime Video</div>
+               <a href="#"><div class="sidenavContent">All Videos</div></a> -->
+             </div>
+           </div>
+         </div>
+     
+         <!--Not Sidenav-->
+         <div
+         onclick="openNav()"
+         style="
+           font-size: 30px;
+           margin-top: 20px;
+           cursor: pointer;
+           display: inline-block;
+           background-color: rgb(255, 255, 255);
+           position: fixed;
+           z-index: 20;
+           color: white;
+         "
+         class="container-fluid">
+         
+             
+         <!-- Five Menu Items -->
+         <ul style="list-style: none; padding: 0; margin: 0; position: absolute; left: 0; background-color: rgb(35, 47, 62); display: flex;" class="container-fluid">
+            <li style="font-size: 20px; padding: 10px; cursor: pointer; border-bottom: 1px solid rgba(255, 255, 255, 0.2);"><i class="fa-solid fa-bars p-2 menu"></i>All</li>
+           
+         </ul>
+         
+      </div>
+      
+        
+         <script>
+                 function openNav() {
+                 document.getElementById("mySidenav").style.animation = "expand 0.3s forwards";
+                 //closeBtn
+                 document.getElementById("closeBtn").style.display = "block";
+                 document.getElementById("closeBtn").style.animation = "show 0.3s";
+                 //Overlay
+                 document.getElementById("overlay").style.display = "block";
+                 document.getElementById("overlay").style.animation = "show 0.3s";
+     
+         }
+     
+             function closeNav() {
+                 document.getElementById("mySidenav").style.animation = "collapse 0.3s forwards";
+                 //closeBtn
+                 document.getElementById("closeBtn").style.animation = "hide 0.3s";
+                 //Overlay
+                 document.getElementById("overlay").style.animation = "hide 0.3s";
+     
+                 setTimeout(() => {
+                     document.getElementById("closeBtn").style.display = "none";
+                     document.getElementById("overlay").style.display = "none";
+                     //Reset Menus
+                     document.getElementById("main-container").style.animation = "";
+                     document.getElementById("main-container").style.transform = "translateX(0px)";
+                     document.getElementById("sub-container").style.animation = "";
+                     document.getElementById("sub-container").style.transform = "translateX(380px)";
+                 }, 300)
+             }
+     
+     let firstDropdownOpen = false;
+     
+     function firstDropDown() {
+         firstDropdownOpen = !firstDropdownOpen;
+         if(firstDropdownOpen) {
+             document.querySelector("#firstDropDown i").setAttribute("class", "fas fa-chevron-up");
+             document.querySelector("#firstDropDown div").innerHTML = "See Less";
+             //Handle Container
+             document.getElementById("firstContainer").style.display = "block";
+             document.getElementById("firstContainer").style.animation = "expandDropDown 0.3s forwards";
+             document.getElementById("firstContainer").style.transition = "height 0.3s";
+             document.getElementById("firstContainer").style.height = "410px";
+         }else{
+             document.querySelector("#firstDropDown i").setAttribute("class", "fas fa-chevron-down");
+             document.querySelector("#firstDropDown div").innerHTML = "See More";
+             //Handle Container
+             document.getElementById("firstContainer").style.animation = "collapseDropDown 0.2s forwards";
+             document.getElementById("firstContainer").style.transition = "height 0.2s";
+             document.getElementById("firstContainer").style.height = "0px";
+             setTimeout(() => {
+                 document.getElementById("firstContainer").style.display = "none";
+             }, 200)
+             
+         }
+     }
+     
+     let secondDropDownOpen = false;
+     
+     function secondDropDown() {
+         secondDropDownOpen = !secondDropDownOpen;
+     
+         if(secondDropDownOpen) {
+             document.querySelector("#secondDropDown i").setAttribute("class", "fas fa-chevron-up");
+             document.querySelector("#secondDropDown div").innerHTML = "See Less";
+             //Handle Container
+             document.getElementById("secondContainer").style.display = "block";
+             document.getElementById("secondContainer").style.animation = "expandDropDown 0.3s forwards";
+             document.getElementById("secondContainer").style.transition = "height 0.3s";
+             document.getElementById("secondContainer").style.height = "260px";
+         }else{
+             document.querySelector("#secondDropDown i").setAttribute("class", "fas fa-chevron-down");
+             document.querySelector("#secondDropDown div").innerHTML = "See More";
+             //Handle Container
+             document.getElementById("secondContainer").style.animation = "collapseDropDown 0.2s forwards";
+             document.getElementById("secondContainer").style.transition = "height 0.2s";
+             document.getElementById("secondContainer").style.height = "0px";
+             setTimeout(() => {
+                 document.getElementById("secondContainer").style.display = "none";
+             }, 200)
+             
+         }
+     }
+     
+     document.querySelectorAll(".sidenavRow").forEach(row => {
+         row.addEventListener("click", () => {
+             document.getElementById("main-container").style.animation = "mainAway 0.3s forwards";
+             document.getElementById("sub-container").style.animation = "subBack 0.3s forwards";
+         });
+     });
+     
+     document.getElementById("mainMenu").addEventListener("click", () => {
+         document.getElementById("main-container").style.animation = "mainBack 0.3s forwards";
+         document.getElementById("sub-container").style.animation = "subPush 0.3s forwards";
+     })
+     
+     //subNavContent
+     
+     function openPrimeVideo() {
+         document.getElementById("sub-container-content").innerHTML = `<div class="sidenavContentHeader">Prime Video</div>
+         <a href="#"><div class="sidenavContent">All Videos</div></a>`;
+     }
+     
+     function openAmazonMusic() {
+         document.getElementById("sub-container-content").innerHTML = `<div class="sidenavContentHeader">Amazon Music</div>
+         <a href="#"><div class="sidenavContent">All Music</div></a>`;
+     }
+         </script>
+      <br><br><br><br>
       <!-- Movie Details -->
       <section class="container">
-        <div class="back">
-          <a id="btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back To Movies</a>
-        </div>
-        <br>
-        <!-- Movie Details Output -->
-        <div id="movie-details">
-         
+        <div class="row">
+          <div class="col-md-6">
+            <div class="back">
+              <a id="btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back To Movies</a>
+            </div>
+            <div class="movie-image">
+              <img id="img-back" src="" alt="Movie Backdrop" class="card-img-top">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="movie-details">
+              <h1 id="movie-title"></h1>
+              <p id="movie-overview"></p>
+              <label for="">Release Date:</label>
+              <p id="release-date"></p>
+              <p id="movie-genres"></p>
+              <a id="homepage-link" href="" target="_blank" class="btn btn-success">Visit Homepage</a>
+            </div>
+          </div>
         </div>
       </section>
+      
+      
+      <script>
+        const global = {
+          api: {
+            apiKey: "e76d2381f0382657b3c2960253bbd771",
+            apiUrl: "https://api.themoviedb.org/3/",
+          },
+        };
+    
+        async function fetchMovieDetails(movieId) {
+          try {
+            const response = await fetch(`${global.api.apiUrl}movie/${movieId}?api_key=${global.api.apiKey}`);
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return await response.json();
+          } catch (error) {
+            console.error("Error fetching movie details:", error);
+            throw error;
+          }
+        }
+    
+        // Get the movie ID from the query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieId = urlParams.get("id");
+    
+        // Fetch and display movie details
+        async function displayMovieDetails() {
+          try {
+            const movieDetails = await fetchMovieDetails(movieId);
+    
+            // Populate the HTML elements with the movie details
+            const imgDesign = document.getElementById("img-back");
+            imgDesign.src = `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`;
+            imgDesign.alt = `${movieDetails.title} Backdrop`;
 
+            const movieTitleElement = document.getElementById("movie-title");
+            movieTitleElement.textContent = movieDetails.original_title;
+    
+            const movieOverviewElement = document.getElementById("movie-overview");
+            movieOverviewElement.textContent = movieDetails.overview;
+            
+            
+            const releaseDate = document.getElementById("release-date");
+            releaseDate.textContent = movieDetails.release_date;
 
+            const homepageLink = document.getElementById("homepage-link");
+            homepageLink.href = movieDetails.homepage;
+            homepageLink.textContent = "Visit Homepage";
+
+             // Populate the genres
+            const movieGenresElement = document.getElementById("movie-genres");
+            const genreNames = movieDetails.genres.map(genre => genre.name).join(", ");
+            movieGenresElement.textContent = `Genres: ${genreNames}`;
+
+          } catch (error) {
+            console.error("Error displaying movie details:", error);
+          }
+        }
+    
+        displayMovieDetails();
+      </script>
    
 
 </body>
-
-
-<!-- slider JS ENDS -->
-
 <!-- content JS -->
 <script src="content.js"></script>
 

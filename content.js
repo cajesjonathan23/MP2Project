@@ -97,7 +97,7 @@ async function fetchAPIData(endpoint) {
   }
 }
 
-// Display 20 most popular movies
+
 async function displayPopularMovies() {
   const { results } = await fetchAPIData("movie/popular");
 
@@ -105,30 +105,53 @@ async function displayPopularMovies() {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
-          <a href="movie-details.html?id=${movie.id}">
-            ${
-              movie.poster_path
-                ? `<img
-              src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
-              class="card-img-top"
-              alt="${movie.title}"
-            />`
-                : `<img
-            src="../images/no-image.jpg"
-            class="card-img-top"
-            alt="${movie.title}"
-          />`
-            }
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">${movie.title}</h5>
-            <p class="card-text">
-              <small class="text-muted">Release: ${movie.release_date}</small>
-            </p>
-          </div>
-        `;
+      <a href="movie-details.html?id=${movie.id}"> <!-- Add this anchor tag -->
+        ${
+          movie.poster_path
+            ? `<img
+          src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+          class="card-img-top"
+          alt="${movie.title}"
+        />`
+            : `<img
+        src="../images/no-image.jpg"
+        class="card-img-top"
+        alt="${movie.title}"
+      />`
+        }
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">${movie.title}</h5>
+        <p class="card-text">
+          <small class="text-muted">Release: ${movie.release_date}</small>
+        </p>
+      </div>
+    `;
+
+    // Add an event listener to the anchor tag for each movie card
+    const anchorTag = div.querySelector("a");
+    anchorTag.addEventListener("click", (event) => {
+      // Prevent the default link behavior
+      event.preventDefault();
+      
+      // Redirect to the movie-details.html page with the appropriate query parameter
+      const movieId = movie.id;
+      window.location.href = `movie-details.html?id=${movieId}`;
+    });
 
     document.querySelector("#popular-movies").appendChild(div);
   });
 }
 displayPopularMovies();
+
+async function fetchMovieDetails(movieId) {
+  const endpoint = `movie/${movieId}`;
+  try {
+    const data = await fetchAPIData(endpoint);
+   
+    return data;
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    throw error;
+  }
+}
